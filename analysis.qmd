@@ -1,0 +1,31 @@
+---
+title: "06-12-24"
+author: "Aditya Narayan"
+format: html
+---
+```{r}
+#| label: setup
+#| echo: false
+#| message: false
+library(tidyverse)
+library(ggbeeswarm)
+```
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+nyc_tracts <- read.csv("data/nyc_tracts.csv")
+nyc_tracts |> ggplot(mapping = aes(x = med_income, y = race)) + 
+  geom_beeswarm(alpha = 0.5, aes(color = med_income)) + 
+  scale_x_continuous(labels = scales::dollar_format()) + 
+  scale_color_viridis_c()
+  labs(title = "Household income distribution by largest racial/ethic group",
+       subtitle = "Census tracts, New York City",
+       x = "Median household income",
+       y = NULL, 
+       caption = "Data source: 2016-2020 ACS",
+       color = "Median Income") 
+      
+```
+
